@@ -43,7 +43,7 @@ get :: forall m a. MonadAff m => DecodeJson a => Store -> Getter m a
 get store cookie = do
   map <- liftEffect $ Ref.read store
 
-  pure $ do
+  pure do
     key <- getKey cookie
     val <- note "session not found" $ Map.lookup key map
     json <- jsonParser val
