@@ -6,6 +6,8 @@
     "purescript-language-server": "^0.12.7"
   },
   "dependencies": {
-    "libsodium-wrappers": "^0.7.5"
+    "libsodium-wrappers": "^0.7.5",
+    "uuid": "^3.3.3",
+    "uuid-validate": "0.0.3"
   }
 }
