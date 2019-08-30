@@ -4,7 +4,7 @@ module Test.HTTP.Session.Store.MemoryTest
 
 import Prelude
 
-import Data.Either (fromRight)
+import Data.Either (Either(..), fromRight)
 import HTTP.Cookie.Types (Cookie(..))
 import HTTP.Session as Session
 import HTTP.Session.Store as Store
@@ -33,9 +33,12 @@ testSuite = do
 
       newSession `shouldEqual` session'
 
-    test "destroy returns an empty cookie" do
+    test "destroy returns an empty cookie and removes the key" do
       store <- Session.memoryStore "_my_app"
       cookie <- unsafePartial $ fromRight <$> Store.create store { currentUser: "drew" }
       cookie' <- unsafePartial $ fromRight <$> Store.destroy store cookie
 
+      session <- Store.get store cookie
+
       cookie' `shouldEqual` Empty
+      session `shouldEqual` Left "session not found"

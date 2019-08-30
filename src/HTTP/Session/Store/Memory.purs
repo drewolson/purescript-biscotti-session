@@ -62,7 +62,13 @@ set store session cookie = do
       pure $ Right cookie
 
 destroy :: forall m. MonadAff m => Store -> Destroyer m
-destroy store cookie = pure $ Right $ Empty
+destroy store cookie = do
+  case getKey cookie of
+    Left e ->
+      pure $ Left e
+    Right key -> do
+      liftEffect $ Ref.modify_ (Map.delete key) store
+      pure $ Right Empty
 
 getKey :: Cookie -> Either String UUID
 getKey =
