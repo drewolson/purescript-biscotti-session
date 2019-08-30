@@ -34,6 +34,11 @@ import HTTP.Session as Session
 let store = Session.cookieStore "_my_app" "724b092810ec86d7e35c9d067702b31ef90bc43a7b598626749914d6a3e033ed"
 ```
 
+**Note**: This is an example secret.  Please don't
+commit your production secret to your git repo or post it on the internet. Also,
+please don't use this secret as it is already posted on the internet. It's
+literally right above this paragraph and you're reading this on Github.
+
 ### Memory Store
 
 The `Memory` session store uses an in-memory map to store sessions. This is
