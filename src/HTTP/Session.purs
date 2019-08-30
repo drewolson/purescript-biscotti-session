@@ -6,7 +6,7 @@ module HTTP.Session
 
 import Data.Argonaut (class DecodeJson, class EncodeJson)
 import Effect.Aff.Class (class MonadAff)
-import HTTP.Session.Store (Creater, SessionStore(..), Getter)
+import HTTP.Session.Store (SessionStore, create, destroy, get, set)
 import HTTP.Session.Store.Cookie as CookieStore
 import HTTP.Session.Store.Memory as MemoryStore
 
