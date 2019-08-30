@@ -1,0 +1,11 @@
+{
+  "description": "purescript-session",
+  "repository": "https://github.com/drewolson/purescript-session",
+  "license": "MIT",
+  "devDependencies": {
+    "purescript-language-server": "^0.12.7"
+  },
+  "dependencies": {
+    "libsodium-wrappers": "^0.7.5"
+  }
+}
