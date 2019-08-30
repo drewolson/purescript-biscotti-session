@@ -7,12 +7,13 @@ assumption that your session data is JSON-serializable (using the Argonaut
 
 `Session` provides 4 basic functions: `create`, `get`, `set` and `destroy`.
 
-* `create` takes a `SessionStore` and your session data and returns a `Cookie`
-representing your new session.
-* `get` takes a `SessionStore` and a `Cookie` and returns your session data,
-if available.
+* `create` takes a `SessionStore` and your session data and returns a
+  [Cookie](https://github.com/drewolson/purescript-cookie-parser) representing
+  your new session.
+* `get` takes a `SessionStore` and a `Cookie` and returns your session data, if
+  available.
 * `set` takes a `SessionStore`, your session data and your current session
-`Cookie`. It returns a new session `Cookie`.
+  `Cookie`. It returns a new session `Cookie`.
 * `destroy` takes a `SessionStore` and your session `Cookie` and returns a new,
 empty session `Cookie`.
 
