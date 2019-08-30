@@ -52,12 +52,11 @@ get store cookie = do
 
 set :: forall m a. MonadAff m => EncodeJson a => Store -> Setter m a
 set store session cookie = do
-  let value = stringify $ encodeJson $ session
-
   case getKey cookie of
     Left e ->
       pure $ Left e
     Right key -> do
+      let value = stringify $ encodeJson $ session
       liftEffect $ Ref.modify_ (Map.insert key value) store
       pure $ Right cookie
 
