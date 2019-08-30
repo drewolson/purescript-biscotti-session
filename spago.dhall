@@ -3,7 +3,6 @@
 , dependencies =
     [ "aff"
     , "argonaut"
-    , "console"
     , "cookie-parser"
     , "effect"
     , "newtype"
