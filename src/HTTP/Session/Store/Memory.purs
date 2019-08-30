@@ -15,7 +15,7 @@ import Effect.Class (liftEffect)
 import Effect.Ref (Ref)
 import Effect.Ref as Ref
 import HTTP.Cookie as Cookie
-import HTTP.Cookie.Types (Cookie(..))
+import HTTP.Cookie.Types (Cookie)
 import HTTP.Session.Store (Destroyer, Getter, SessionStore(..), Setter, Creater)
 
 type Store = Ref (Map UUID String)
@@ -67,7 +67,7 @@ destroy store cookie = do
       pure $ Left e
     Right key -> do
       liftEffect $ Ref.modify_ (Map.delete key) store
-      pure $ Right Empty
+      pure $ Right Cookie.empty
 
 getKey :: Cookie -> Either String UUID
 getKey =

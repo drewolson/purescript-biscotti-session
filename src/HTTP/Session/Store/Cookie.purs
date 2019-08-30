@@ -10,7 +10,7 @@ import Data.Lens as Lens
 import Effect.Aff.Class (class MonadAff, liftAff)
 import Effect.Aff.Compat (EffectFnAff, fromEffectFnAff)
 import HTTP.Cookie as Cookie
-import HTTP.Cookie.Types (Cookie(..), _value)
+import HTTP.Cookie.Types (_value)
 import HTTP.Session.Store (Destroyer, Getter, SessionStore(..), Setter, Creater)
 
 new :: forall m a. MonadAff m => DecodeJson a => EncodeJson a => String -> String -> SessionStore m a
@@ -40,7 +40,7 @@ set secret session cookie = do
   pure $ Right $ Lens.set _value value cookie
 
 destroy :: forall m. MonadAff m => Destroyer m
-destroy _ = pure $ Right $ Empty
+destroy _ = pure $ Right Cookie.empty
 
 encrypt :: forall m. MonadAff m => String -> String -> m String
 encrypt secret plaintext = liftAff $ fromEffectFnAff $ _encrypt secret plaintext
