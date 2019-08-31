@@ -23,7 +23,12 @@ empty session `Cookie`.
 
 The `Cookie` session store uses
 [libsodium](https://github.com/jedisct1/libsodium.js) to encrypt and decrypt
-session data directly in the cookie.
+session data directly in the cookie. You'll need to install the npm package
+`libsodium-wrappers`:
+
+```text
+npm install libsodium-wrappers
+```
 
 You create a `Cookie` store by calling `HTTP.Session.cookieStore` with a name
 for your session cookie and a `libsodium`-compatible secret, hex encoded.
@@ -43,7 +48,12 @@ literally right above this paragraph and you're reading this on Github.
 
 The `Memory` session store uses an in-memory map to store sessions. This is
 primarily for development purposes as it will not persist sessions across
-multiple application servers.
+multiple application servers. You'll need to install two npm packages to
+generate UUIDs:
+
+```text
+npm install uuid uuid-validate
+```
 
 You create a `Memory` store by calling `HTTP.Session.memoryStore` with a name
 for your session cookie. Note that this returns a `MonadAff m => m SessionStore`
