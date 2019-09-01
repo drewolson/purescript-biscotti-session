@@ -1,9 +1,12 @@
-module HTTP.Session.Store.Memory
+module Biscotti.Session.Store.Memory
   ( new
   ) where
 
 import Prelude
 
+import Biscotti.Cookie as Cookie
+import Biscotti.Cookie.Types (Cookie)
+import Biscotti.Session.Store (Destroyer, Getter, SessionStore(..), Setter, Creater)
 import Data.Argonaut (class DecodeJson, class EncodeJson, decodeJson, encodeJson, jsonParser, stringify)
 import Data.Either (Either(..), note)
 import Data.Map (Map)
@@ -14,9 +17,6 @@ import Effect.Aff.Class (class MonadAff)
 import Effect.Class (liftEffect)
 import Effect.Ref (Ref)
 import Effect.Ref as Ref
-import HTTP.Cookie as Cookie
-import HTTP.Cookie.Types (Cookie)
-import HTTP.Session.Store (Destroyer, Getter, SessionStore(..), Setter, Creater)
 
 type Store = Ref (Map UUID String)
 

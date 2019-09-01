@@ -1,6 +1,6 @@
 {
-  "description": "purescript-session",
-  "repository": "https://github.com/drewolson/purescript-session",
+  "description": "purescript-biscotti-session",
+  "repository": "https://github.com/drewolson/purescript-biscotti-session",
   "license": "MIT",
   "devDependencies": {
     "purescript-language-server": "^0.12.7"

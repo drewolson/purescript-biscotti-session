@@ -1,4 +1,4 @@
-module HTTP.Session.Store
+module Biscotti.Session.Store
   ( Creater
   , Destroyer
   , Getter
@@ -10,10 +10,10 @@ module HTTP.Session.Store
   , set
   ) where
 
+import Biscotti.Cookie (Cookie)
 import Data.Argonaut (class DecodeJson, class EncodeJson)
 import Data.Either (Either)
 import Effect.Aff.Class (class MonadAff)
-import HTTP.Cookie (Cookie)
 
 type Creater m a = a -> m (Either String Cookie)
 

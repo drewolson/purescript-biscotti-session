@@ -1,17 +1,17 @@
-module HTTP.Session.Store.Cookie
+module Biscotti.Session.Store.Cookie
   ( new
   ) where
 
 import Prelude
 
+import Biscotti.Cookie as Cookie
+import Biscotti.Cookie.Types (_value)
+import Biscotti.Session.Store (Destroyer, Getter, SessionStore(..), Setter, Creater)
 import Data.Argonaut (class DecodeJson, class EncodeJson, decodeJson, encodeJson, jsonParser, stringify)
 import Data.Either (Either(..))
 import Data.Lens as Lens
 import Effect.Aff.Class (class MonadAff, liftAff)
 import Effect.Aff.Compat (EffectFnAff, fromEffectFnAff)
-import HTTP.Cookie as Cookie
-import HTTP.Cookie.Types (_value)
-import HTTP.Session.Store (Destroyer, Getter, SessionStore(..), Setter, Creater)
 
 new :: forall m a. MonadAff m => DecodeJson a => EncodeJson a => String -> String -> SessionStore m a
 new name secret = SessionStore

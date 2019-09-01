@@ -4,7 +4,7 @@ let upstream =
 let overrides = {=}
 
 let additions =
-      { cookie-parser =
+      { biscotti-cookie =
           { dependencies =
               [ "datetime"
               , "effect"
@@ -23,9 +23,9 @@ let additions =
               , "test-unit"
               ]
           , repo =
-              "https://github.com/drewolson/purescript-cookie-parser.git"
+              "https://github.com/drewolson/purescript-biscotti-cookie.git"
           , version =
-              "2ec31ed4cbdeb699c22a902af4dbb8e8f238a6e7"
+              "7dde03494bf346440d2fd647a8fbd26078a05b82"
           }
       }
 

@@ -3,8 +3,8 @@ module Test.Main where
 import Prelude
 
 import Effect (Effect)
-import Test.HTTP.Session.Store.CookieTest as CookieTest
-import Test.HTTP.Session.Store.MemoryTest as MemoryTest
+import Test.Biscotti.Session.Store.CookieTest as CookieTest
+import Test.Biscotti.Session.Store.MemoryTest as MemoryTest
 import Test.Unit.Main (runTest)
 
 main :: Effect Unit

@@ -1,4 +1,4 @@
-# purescript-session
+# purescript-biscotti-session
 
 This library provides tools to manage sessions in PureScript. It makes the
 assumption that your session data is JSON-serializable (using the Argonaut
@@ -8,7 +8,7 @@ assumption that your session data is JSON-serializable (using the Argonaut
 `Session` provides 4 basic functions: `create`, `get`, `set` and `destroy`.
 
 * `create` takes a `SessionStore` and your session data and returns a
-  [Cookie](https://github.com/drewolson/purescript-cookie-parser) representing
+  [Cookie](https://github.com/drewolson/purescript-biscotti-cookie) representing
   your new session.
 * `get` takes a `SessionStore` and a `Cookie` and returns your session data, if
   available.
@@ -30,11 +30,11 @@ session data directly in the cookie. You'll need to install the npm package
 npm install libsodium-wrappers
 ```
 
-You create a `Cookie` store by calling `HTTP.Session.cookieStore` with a name
-for your session cookie and a `libsodium`-compatible secret, hex encoded.
+You create a `Cookie` store by calling `Biscotti.Session.cookieStore` with a
+name for your session cookie and a `libsodium`-compatible secret, hex encoded.
 
 ```purescript
-import HTTP.Session as Session
+import Biscotti.Session as Session
 
 let store = Session.cookieStore "_my_app" "724b092810ec86d7e35c9d067702b31ef90bc43a7b598626749914d6a3e033ed"
 ```
@@ -55,12 +55,12 @@ generate UUIDs:
 npm install uuid uuid-validate
 ```
 
-You create a `Memory` store by calling `HTTP.Session.memoryStore` with a name
-for your session cookie. Note that this returns a `MonadAff m => m SessionStore`
-because it requires initializing a `Ref`.
+You create a `Memory` store by calling `Biscotti.Session.memoryStore` with a
+name for your session cookie. Note that this returns a `MonadAff m => m
+SessionStore` because it requires initializing a `Ref`.
 
 ```purescript
-import HTTP.Session as Session
+import Biscotti.Session as Session
 
 launchAff_ do
   store <- Session.memoryStore "_my_app"

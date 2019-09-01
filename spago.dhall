@@ -1,9 +1,9 @@
 { name =
-    "session"
+    "biscotti-session"
 , dependencies =
     [ "aff"
     , "argonaut"
-    , "cookie-parser"
+    , "biscotti-cookie"
     , "effect"
     , "newtype"
     , "ordered-collections"
