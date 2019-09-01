@@ -1,5 +1,9 @@
 { name =
     "biscotti-session"
+, license =
+    "MIT"
+, repository =
+    "https://github.com/drewolson/purescript-biscotti-session"
 , dependencies =
     [ "aff"
     , "argonaut"
