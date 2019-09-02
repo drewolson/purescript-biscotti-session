@@ -55,6 +55,7 @@ set store session cookie = do
   case getKey cookie of
     Left e ->
       pure $ Left e
+
     Right key -> do
       let value = stringify $ encodeJson $ session
       liftEffect $ Ref.modify_ (Map.insert key value) store
@@ -65,9 +66,10 @@ destroy store cookie = do
   case getKey cookie of
     Left e ->
       pure $ Left e
+
     Right key -> do
       liftEffect $ Ref.modify_ (Map.delete key) store
-      pure $ Right Cookie.empty
+      liftEffect $ Cookie.expired cookie
 
 getKey :: Cookie -> Either String UUID
 getKey =

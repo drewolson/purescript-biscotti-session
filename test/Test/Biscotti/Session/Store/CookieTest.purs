@@ -8,9 +8,10 @@ import Biscotti.Cookie.Types (Cookie(..))
 import Biscotti.Session as Session
 import Biscotti.Session.Store as Store
 import Data.Either (fromRight)
+import Data.Maybe (Maybe(..))
 import Partial.Unsafe (unsafePartial)
 import Test.Unit (TestSuite, suite, test)
-import Test.Unit.Assert (shouldEqual)
+import Test.Unit.Assert (assert, shouldEqual)
 
 testSuite :: TestSuite
 testSuite = do
@@ -33,9 +34,14 @@ testSuite = do
 
       newSession `shouldEqual` session'
 
-    test "destroy returns an empty cookie" do
+    test "destroy returns an expired cookie" do
       let store = Session.cookieStore "_my_app" "724b092810ec86d7e35c9d067702b31ef90bc43a7b598626749914d6a3e033ed"
       cookie <- unsafePartial $ fromRight <$> Store.create store { currentUser: "drew" }
+
+      let Cookie { expires } = cookie
+      expires `shouldEqual` Nothing
+
       cookie' <- unsafePartial $ fromRight <$> Store.destroy store cookie
 
-      cookie' `shouldEqual` Empty
+      let Cookie { expires: expires' } = cookie'
+      assert "expected an expires date" $ expires' /= Nothing

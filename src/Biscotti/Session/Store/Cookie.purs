@@ -12,6 +12,7 @@ import Data.Either (Either(..))
 import Data.Lens as Lens
 import Effect.Aff.Class (class MonadAff, liftAff)
 import Effect.Aff.Compat (EffectFnAff, fromEffectFnAff)
+import Effect.Class (liftEffect)
 
 new :: forall m a. MonadAff m => DecodeJson a => EncodeJson a => String -> String -> SessionStore m a
 new name secret = SessionStore
@@ -40,7 +41,7 @@ set secret session cookie = do
   pure $ Right $ Lens.set _value value cookie
 
 destroy :: forall m. MonadAff m => Destroyer m
-destroy _ = pure $ Right Cookie.empty
+destroy = liftEffect <<< Cookie.expired
 
 encrypt :: forall m. MonadAff m => String -> String -> m String
 encrypt secret plaintext = liftAff $ fromEffectFnAff $ _encrypt secret plaintext
