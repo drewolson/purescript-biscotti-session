@@ -13,31 +13,31 @@ module Biscotti.Session.Store
 import Biscotti.Cookie (Cookie)
 import Data.Argonaut (class DecodeJson, class EncodeJson)
 import Data.Either (Either)
-import Effect.Aff.Class (class MonadAff)
+import Effect.Aff (Aff)
 
-type Creater m a = a -> m (Either String Cookie)
+type Creater a = a -> Aff (Either String Cookie)
 
-type Getter m a = Cookie -> m (Either String a)
+type Getter a = Cookie -> Aff (Either String a)
 
-type Setter m a = a -> Cookie -> m (Either String Cookie)
+type Setter a = a -> Cookie -> Aff (Either String Cookie)
 
-type Destroyer m = Cookie -> m (Either String Cookie)
+type Destroyer = Cookie -> Aff (Either String Cookie)
 
-newtype SessionStore m a = SessionStore
-  { create  :: Creater m a
-  , get     :: Getter m a
-  , set     :: Setter m a
-  , destroy :: Destroyer m
+newtype SessionStore a = SessionStore
+  { create  :: Creater a
+  , get     :: Getter a
+  , set     :: Setter a
+  , destroy :: Destroyer
   }
 
-create :: forall m a. MonadAff m => EncodeJson a => SessionStore m a -> Creater m a
+create :: forall a. EncodeJson a => SessionStore a -> Creater a
 create (SessionStore store) = store.create
 
-get :: forall m a. MonadAff m => DecodeJson a => SessionStore m a -> Getter m a
+get :: forall a. DecodeJson a => SessionStore a -> Getter a
 get (SessionStore store) = store.get
 
-set :: forall m a. MonadAff m => EncodeJson a => SessionStore m a -> Setter m a
+set :: forall a. EncodeJson a => SessionStore a -> Setter a
 set (SessionStore store) = store.set
 
-destroy :: forall m a. MonadAff m => EncodeJson a => SessionStore m a -> Destroyer m
+destroy :: forall a. EncodeJson a => SessionStore a -> Destroyer
 destroy (SessionStore store) = store.destroy

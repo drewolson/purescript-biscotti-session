@@ -10,11 +10,11 @@ import Biscotti.Session.Store (Destroyer, Getter, SessionStore(..), Setter, Crea
 import Data.Argonaut (class DecodeJson, class EncodeJson, decodeJson, encodeJson, jsonParser, stringify)
 import Data.Either (Either(..))
 import Data.Lens as Lens
-import Effect.Aff.Class (class MonadAff, liftAff)
+import Effect.Aff (Aff)
 import Effect.Aff.Compat (EffectFnAff, fromEffectFnAff)
 import Effect.Class (liftEffect)
 
-new :: forall m a. MonadAff m => DecodeJson a => EncodeJson a => String -> String -> SessionStore m a
+new :: forall a. DecodeJson a => EncodeJson a => String -> String -> SessionStore a
 new name secret = SessionStore
   { create: create name secret
   , get: get secret
@@ -22,32 +22,32 @@ new name secret = SessionStore
   , destroy: destroy
   }
 
-create :: forall m a. MonadAff m => EncodeJson a => String -> String -> Creater m a
+create :: forall a. EncodeJson a => String -> String -> Creater a
 create name secret session = do
   value <- encrypt secret $ stringify $ encodeJson session
 
   pure $ Right $ Cookie.new name value
 
-get :: forall m a. MonadAff m => DecodeJson a => String -> Getter m a
+get :: forall a. DecodeJson a => String -> Getter a
 get secret cookie = do
   value <- decrypt secret $ Cookie.getValue cookie
 
   pure $ decodeJson =<< jsonParser value
 
-set :: forall m a. MonadAff m => EncodeJson a => String -> Setter m a
+set :: forall a. EncodeJson a => String -> Setter a
 set secret session cookie = do
   value <- encrypt secret $ stringify $ encodeJson session
 
   pure $ Right $ Lens.set _value value cookie
 
-destroy :: forall m. MonadAff m => Destroyer m
+destroy :: Destroyer
 destroy = liftEffect <<< Cookie.expired
 
-encrypt :: forall m. MonadAff m => String -> String -> m String
-encrypt secret plaintext = liftAff $ fromEffectFnAff $ _encrypt secret plaintext
+encrypt :: String -> String -> Aff String
+encrypt secret plaintext = fromEffectFnAff $ _encrypt secret plaintext
 
-decrypt :: forall m. MonadAff m => String -> String -> m String
-decrypt secret ciphertext = liftAff $ fromEffectFnAff $ _decrypt secret ciphertext
+decrypt :: String -> String -> Aff String
+decrypt secret ciphertext = fromEffectFnAff $ _decrypt secret ciphertext
 
 foreign import _decrypt :: String -> String -> EffectFnAff String
 

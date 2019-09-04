@@ -14,14 +14,13 @@ import Data.Map as Map
 import Data.UUID (UUID)
 import Data.UUID as UUID
 import Effect (Effect)
-import Effect.Aff.Class (class MonadAff)
 import Effect.Class (liftEffect)
 import Effect.Ref (Ref)
 import Effect.Ref as Ref
 
 type Store = Ref (Map UUID String)
 
-new :: forall m a. MonadAff m => DecodeJson a => EncodeJson a => String -> Effect (SessionStore m a)
+new :: forall a. DecodeJson a => EncodeJson a => String -> Effect (SessionStore a)
 new name = do
   store <- Ref.new $ Map.empty
 
@@ -32,7 +31,7 @@ new name = do
     , destroy: destroy store
     }
 
-create :: forall m a. MonadAff m => EncodeJson a => Store -> String -> Creater m a
+create :: forall a. EncodeJson a => Store -> String -> Creater a
 create store name session = do
   key <- liftEffect $ UUID.genUUID
   let value = stringify $ encodeJson session
@@ -40,7 +39,7 @@ create store name session = do
 
   pure $ Right $ Cookie.new name (UUID.toString key)
 
-get :: forall m a. MonadAff m => DecodeJson a => Store -> Getter m a
+get :: forall a. DecodeJson a => Store -> Getter a
 get store cookie = do
   map <- liftEffect $ Ref.read store
 
@@ -51,7 +50,7 @@ get store cookie = do
 
     decodeJson json
 
-set :: forall m a. MonadAff m => EncodeJson a => Store -> Setter m a
+set :: forall a. EncodeJson a => Store -> Setter a
 set store session cookie = do
   case getKey cookie of
     Left e ->
@@ -62,7 +61,7 @@ set store session cookie = do
       liftEffect $ Ref.modify_ (Map.insert key value) store
       pure $ Right cookie
 
-destroy :: forall m. MonadAff m => Store -> Destroyer m
+destroy :: Store -> Destroyer
 destroy store cookie = do
   case getKey cookie of
     Left e ->

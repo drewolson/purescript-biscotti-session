@@ -9,10 +9,9 @@ import Biscotti.Session.Store.Cookie as CookieStore
 import Biscotti.Session.Store.Memory as MemoryStore
 import Data.Argonaut (class DecodeJson, class EncodeJson)
 import Effect (Effect)
-import Effect.Aff.Class (class MonadAff)
 
-cookieStore :: forall m a. MonadAff m => DecodeJson a => EncodeJson a => String -> String -> SessionStore m a
+cookieStore :: forall a. DecodeJson a => EncodeJson a => String -> String -> SessionStore a
 cookieStore = CookieStore.new
 
-memoryStore :: forall m a. MonadAff m => DecodeJson a => EncodeJson a => String -> Effect (SessionStore m a)
+memoryStore :: forall a. DecodeJson a => EncodeJson a => String -> Effect (SessionStore a)
 memoryStore = MemoryStore.new

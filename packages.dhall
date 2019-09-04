@@ -26,7 +26,7 @@ let additions =
           , repo =
               "https://github.com/drewolson/purescript-biscotti-cookie.git"
           , version =
-              "fcd1fa9da245dfce36bcb9e790b6d6bcfa3843d0"
+              "590a27bb601fa9d05d337e9e90b86dae325cfbc4"
           }
       }
 
