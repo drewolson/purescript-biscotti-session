@@ -13,6 +13,7 @@ import Data.Map (Map)
 import Data.Map as Map
 import Data.UUID (UUID)
 import Data.UUID as UUID
+import Effect (Effect)
 import Effect.Aff.Class (class MonadAff)
 import Effect.Class (liftEffect)
 import Effect.Ref (Ref)
@@ -20,9 +21,9 @@ import Effect.Ref as Ref
 
 type Store = Ref (Map UUID String)
 
-new :: forall m a. MonadAff m => DecodeJson a => EncodeJson a => String -> m (SessionStore m a)
+new :: forall m a. MonadAff m => DecodeJson a => EncodeJson a => String -> Effect (SessionStore m a)
 new name = do
-  store <- liftEffect $ Ref.new $ Map.empty
+  store <- Ref.new $ Map.empty
 
   pure $ SessionStore
     { create: create store name

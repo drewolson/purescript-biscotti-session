@@ -56,8 +56,8 @@ npm install uuid uuid-validate
 ```
 
 You create a `Memory` store by calling `Biscotti.Session.memoryStore` with a
-name for your session cookie. Note that this returns a `MonadAff m => m
-SessionStore` because it requires initializing a `Ref`.
+name for your session cookie. Note that this returns a `Effect SessionStore`
+because it requires initializing a `Ref`.
 
 ```purescript
 import Biscotti.Session as Session
