@@ -41,7 +41,7 @@ set secret session cookie = do
   pure $ Right $ Lens.set _value value cookie
 
 destroy :: Destroyer
-destroy = liftEffect <<< Cookie.expired
+destroy = liftEffect <<< Cookie.expire
 
 encrypt :: String -> String -> Aff String
 encrypt secret plaintext = fromEffectFnAff $ _encrypt secret plaintext

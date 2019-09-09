@@ -69,7 +69,7 @@ destroy store cookie = do
 
     Right key -> do
       liftEffect $ Ref.modify_ (Map.delete key) store
-      liftEffect $ Cookie.expired cookie
+      liftEffect $ Cookie.expire cookie
 
 getKey :: Cookie -> Either String UUID
 getKey =

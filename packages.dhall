@@ -1,33 +1,8 @@
 let upstream =
-      https://github.com/purescript/package-sets/releases/download/psc-0.13.3-20190827/packages.dhall sha256:93f6b11068b42eac6632d56dab659a151c231381e53a16de621ae6d0dab475ce
+      https://raw.githubusercontent.com/purescript/package-sets/bd72269fec59950404a380a46e293bde34b4618f/src/packages.dhall sha256:22aa195cfa65faa3231fe7e6ccd12dcd8c6215dc6598c34e6a7bd981496a3d7b
 
 let overrides = {=}
 
-let additions =
-      { biscotti-cookie =
-          { dependencies =
-              [ "datetime"
-              , "effect"
-              , "either"
-              , "foldable-traversable"
-              , "formatters"
-              , "gen"
-              , "newtype"
-              , "now"
-              , "prelude"
-              , "profunctor-lenses"
-              , "psci-support"
-              , "quickcheck"
-              , "record"
-              , "string-parsers"
-              , "strings"
-              , "test-unit"
-              ]
-          , repo =
-              "https://github.com/drewolson/purescript-biscotti-cookie.git"
-          , version =
-              "590a27bb601fa9d05d337e9e90b86dae325cfbc4"
-          }
-      }
+let additions = {=}
 
 in  upstream // overrides // additions
