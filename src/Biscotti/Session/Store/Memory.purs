@@ -1,3 +1,22 @@
+-- | The `Memory` session store uses an in-memory map to store sessions. This is
+-- | primarily for development purposes as it will not persist sessions across
+-- | multiple application servers. You'll need to install two npm packages to
+-- | generate UUIDs:
+-- |
+-- | ```text
+-- | npm install uuid uuid-validate
+-- | ```
+-- |
+-- | You create a `Memory` store by calling `Biscotti.Session.memoryStore` with a
+-- | name for your session cookie. Note that this returns a `Effect SessionStore`
+-- | because it requires initializing a `Ref`.
+-- |
+-- | ```purescript
+-- | import Biscotti.Session as Session
+-- |
+-- | launchAff_ do
+-- |   store <- liftEffect $ Session.memoryStore "_my_app"
+-- | ```
 module Biscotti.Session.Store.Memory
   ( new
   ) where

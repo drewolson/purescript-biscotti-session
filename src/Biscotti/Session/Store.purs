@@ -30,14 +30,18 @@ newtype SessionStore a = SessionStore
   , destroy :: Destroyer
   }
 
+-- | Create a cookie representing a new session
 create :: forall a. EncodeJson a => SessionStore a -> Creater a
 create (SessionStore store) = store.create
 
+-- | Retrieve the session represented by a cookie
 get :: forall a. DecodeJson a => SessionStore a -> Getter a
 get (SessionStore store) = store.get
 
+-- | Update a cookie to represent a new session
 set :: forall a. EncodeJson a => SessionStore a -> Setter a
 set (SessionStore store) = store.set
 
+-- | Destroy the session represented by a cookie and expire the cookie
 destroy :: forall a. EncodeJson a => SessionStore a -> Destroyer
 destroy (SessionStore store) = store.destroy

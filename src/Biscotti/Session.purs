@@ -1,3 +1,14 @@
+-- | `Session` provides 4 basic functions: `create`, `get`, `set` and `destroy`.
+-- |
+-- | * `create` takes a `SessionStore` and your session data and returns a
+-- |   [Cookie](https://github.com/drewolson/purescript-biscotti-cookie) representing
+-- |   your new session.
+-- | * `get` takes a `SessionStore` and a `Cookie` and returns your session data, if
+-- |   available.
+-- | * `set` takes a `SessionStore`, your session data and your current session
+-- |   `Cookie`. It returns a new session `Cookie`.
+-- | * `destroy` takes a `SessionStore` and your session `Cookie` and returns a new,
+-- |    empty session `Cookie`.
 module Biscotti.Session
   ( cookieStore
   , memoryStore

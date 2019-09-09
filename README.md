@@ -63,7 +63,7 @@ because it requires initializing a `Ref`.
 import Biscotti.Session as Session
 
 launchAff_ do
-  store <- Session.memoryStore "_my_app"
+  store <- liftEffect $ Session.memoryStore "_my_app"
 ```
 
 ## Running the tests
