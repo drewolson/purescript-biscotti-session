@@ -1,5 +1,5 @@
 let upstream =
-      https://raw.githubusercontent.com/purescript/package-sets/bd72269fec59950404a380a46e293bde34b4618f/src/packages.dhall sha256:22aa195cfa65faa3231fe7e6ccd12dcd8c6215dc6598c34e6a7bd981496a3d7b
+      https://raw.githubusercontent.com/purescript/package-sets/402fbe57afb6c14bf5f5d06a93ceb7e209924abd/src/packages.dhall sha256:095e879c67df226c067f09278a76c179b00371fc086f7ffb7b80503fc10afae7
 
 let overrides = {=}
 

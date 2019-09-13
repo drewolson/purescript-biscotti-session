@@ -14,9 +14,9 @@
         "output"
     ],
     "dependencies": {
-        "purescript-aff": "^v5.1.1",
+        "purescript-aff": "^v5.1.2",
         "purescript-argonaut": "^v6.0.0",
-        "purescript-biscotti-cookie": "^v0.1.0",
+        "purescript-biscotti-cookie": "^v0.2.0",
         "purescript-effect": "^v2.0.1",
         "purescript-newtype": "^v3.0.0",
         "purescript-ordered-collections": "^v1.6.1",
