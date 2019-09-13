@@ -1,5 +1,8 @@
 # purescript-biscotti-session
 
+Documentation is available on
+[Pursuit](https://pursuit.purescript.org/packages/purescript-biscotti-session).
+
 This library provides tools to manage sessions in PureScript. It makes the
 assumption that your session data is JSON-serializable (using the Argonaut
 `EncodeJson` and `DecodeJson` type classes). Two session stores are provided:
