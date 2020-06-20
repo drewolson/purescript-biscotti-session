@@ -1,5 +1,7 @@
 # purescript-biscotti-session
 
+[![Build Status](https://travis-ci.org/drewolson/purescript-biscotti-session.svg?branch=master)](https://travis-ci.org/drewolson/purescript-biscotti-session)
+
 Documentation is available on
 [Pursuit](https://pursuit.purescript.org/packages/purescript-biscotti-session).
 
