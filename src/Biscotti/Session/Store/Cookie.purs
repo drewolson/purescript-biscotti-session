@@ -29,7 +29,8 @@ import Prelude
 import Biscotti.Cookie as Cookie
 import Biscotti.Cookie.Types (_value)
 import Biscotti.Session.Store (Destroyer, Getter, SessionStore(..), Setter, Creater)
-import Data.Argonaut (class DecodeJson, class EncodeJson, decodeJson, encodeJson, jsonParser, stringify)
+import Data.Argonaut (class DecodeJson, class EncodeJson, decodeJson, encodeJson, parseJson, printJsonDecodeError, stringify)
+import Data.Bifunctor (lmap)
 import Data.Either (Either(..))
 import Data.Lens as Lens
 import Effect.Aff (Aff)
@@ -54,7 +55,7 @@ get :: forall a. DecodeJson a => String -> Getter a
 get secret cookie = do
   value <- decrypt secret $ Cookie.getValue cookie
 
-  pure $ decodeJson =<< jsonParser value
+  pure $ lmap printJsonDecodeError $ decodeJson =<< parseJson value
 
 set :: forall a. EncodeJson a => String -> Setter a
 set secret session cookie = do
