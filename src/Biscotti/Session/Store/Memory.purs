@@ -66,7 +66,7 @@ get store cookie = do
   pure do
     key <- getKey cookie
     val <- note "session not found" $ Map.lookup key map
-    
+
     lmap printJsonDecodeError $ decodeJson =<< parseJson val
 
 set :: forall a. EncodeJson a => Store -> Setter a
