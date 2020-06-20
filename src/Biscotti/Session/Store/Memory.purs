@@ -26,7 +26,8 @@ import Prelude
 import Biscotti.Cookie as Cookie
 import Biscotti.Cookie.Types (Cookie)
 import Biscotti.Session.Store (Destroyer, Getter, SessionStore(..), Setter, Creater)
-import Data.Argonaut (class DecodeJson, class EncodeJson, decodeJson, encodeJson, jsonParser, stringify)
+import Data.Argonaut (class DecodeJson, class EncodeJson, decodeJson, encodeJson, parseJson, printJsonDecodeError, stringify)
+import Data.Bifunctor (lmap)
 import Data.Either (Either(..), note)
 import Data.Map (Map)
 import Data.Map as Map
@@ -65,9 +66,8 @@ get store cookie = do
   pure do
     key <- getKey cookie
     val <- note "session not found" $ Map.lookup key map
-    json <- jsonParser val
-
-    decodeJson json
+    
+    lmap printJsonDecodeError $ decodeJson =<< parseJson val
 
 set :: forall a. EncodeJson a => Store -> Setter a
 set store session cookie = do

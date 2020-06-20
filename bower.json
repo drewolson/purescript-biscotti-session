@@ -15,16 +15,16 @@
     ],
     "dependencies": {
         "purescript-aff": "^v5.1.2",
-        "purescript-argonaut": "^v6.0.0",
+        "purescript-argonaut": "^v7.0.0",
         "purescript-biscotti-cookie": "^v0.2.0",
         "purescript-effect": "^v2.0.1",
         "purescript-newtype": "^v3.0.0",
         "purescript-ordered-collections": "^v1.6.1",
         "purescript-prelude": "^v4.1.1",
-        "purescript-profunctor-lenses": "^v6.2.0",
+        "purescript-profunctor-lenses": "^v6.3.0",
         "purescript-psci-support": "^v4.0.0",
         "purescript-refs": "^v4.1.0",
         "purescript-test-unit": "^v15.0.0",
-        "purescript-uuid": "^v6.0.0"
+        "purescript-uuid": "^v6.1.0"
     }
 }
