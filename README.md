@@ -77,6 +77,14 @@ launchAff_ do
 spago test
 ```
 
+## Contributing
+
+Make sure the CI build will pass before opening a pull request:
+
+```text
+npm run ci
+```
+
 ## License
 
 MIT
