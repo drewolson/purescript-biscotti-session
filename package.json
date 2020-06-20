@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "eslint": "^7.3.0",
+    "prettier": "^2.0.5",
     "purescript-language-server": "^0.12.7",
     "purty": "^6.2.0"
   },
