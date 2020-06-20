@@ -2,8 +2,27 @@
   "description": "purescript-biscotti-session",
   "repository": "https://github.com/drewolson/purescript-biscotti-session",
   "license": "MIT",
+  "scripts": {
+    "test": "spago test",
+    "format": "npm run format:purty && npm run format:prettier",
+    "format:purty": "find src test -name \"*.purs\" | xargs -n1 purty format --write",
+    "format:prettier": "find src test -name \"*.js\" | xargs prettier --write",
+    "format:check": "npm run format:check:purty && npm run format:check:prettier",
+    "format:check:purty": "find src test -name \"*.purs\" | xargs -n1 purty validate",
+    "format:check:prettier": "find src test -name \"*.js\" | xargs prettier --check",
+    "lint": "eslint src/"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "node": true,
+      "es6": true
+    }
+  },
   "devDependencies": {
-    "purescript-language-server": "^0.12.7"
+    "eslint": "^7.3.0",
+    "purescript-language-server": "^0.12.7",
+    "purty": "^6.2.0"
   },
   "dependencies": {
     "libsodium-wrappers": "^0.7.5",

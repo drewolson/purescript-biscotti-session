@@ -25,7 +25,6 @@ module Biscotti.Session.Store.Cookie
   ) where
 
 import Prelude
-
 import Biscotti.Cookie as Cookie
 import Biscotti.Cookie.Types (_value)
 import Biscotti.Session.Store (Destroyer, Getter, SessionStore(..), Setter, Creater)
@@ -38,29 +37,27 @@ import Effect.Aff.Compat (EffectFnAff, fromEffectFnAff)
 import Effect.Class (liftEffect)
 
 new :: forall a. DecodeJson a => EncodeJson a => String -> String -> SessionStore a
-new name secret = SessionStore
-  { create: create name secret
-  , get: get secret
-  , set: set secret
-  , destroy: destroy
-  }
+new name secret =
+  SessionStore
+    { create: create name secret
+    , get: get secret
+    , set: set secret
+    , destroy: destroy
+    }
 
 create :: forall a. EncodeJson a => String -> String -> Creater a
 create name secret session = do
   value <- encrypt secret $ stringify $ encodeJson session
-
   pure $ Right $ Cookie.new name value
 
 get :: forall a. DecodeJson a => String -> Getter a
 get secret cookie = do
   value <- decrypt secret $ Cookie.getValue cookie
-
   pure $ lmap printJsonDecodeError $ decodeJson =<< parseJson value
 
 set :: forall a. EncodeJson a => String -> Setter a
 set secret session cookie = do
   value <- encrypt secret $ stringify $ encodeJson session
-
   pure $ Right $ Lens.set _value value cookie
 
 destroy :: Destroyer
