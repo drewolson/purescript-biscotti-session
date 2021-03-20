@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.2.0
+
+* Updates for PureScript `v0.14`
+
 ## v0.1.2
 
 * Update `argonaut-codecs` dependency
