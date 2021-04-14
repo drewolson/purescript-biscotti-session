@@ -3,7 +3,7 @@ module Test.Biscotti.Session.Store.CookieTest
   ) where
 
 import Prelude
-import Biscotti.Cookie.Types (Cookie(..))
+import Biscotti.Cookie as Cookie
 import Biscotti.Session as Session
 import Biscotti.Session.Store as Store
 import Data.Maybe (Maybe(..))
@@ -37,10 +37,6 @@ testSuite = do
       let
         store = Session.cookieStore "_my_app" "724b092810ec86d7e35c9d067702b31ef90bc43a7b598626749914d6a3e033ed"
       cookie <- unsafeFromRight <$> Store.create store { currentUser: "drew" }
-      let
-        Cookie { expires } = cookie
-      expires `shouldEqual` Nothing
+      Cookie.getExpires cookie `shouldEqual` Nothing
       cookie' <- unsafeFromRight <$> Store.destroy store cookie
-      let
-        Cookie { expires: expires' } = cookie'
-      assert "expected an expires date" $ expires' /= Nothing
+      assert "expected an expires date" $ (Cookie.getExpires cookie') /= Nothing
