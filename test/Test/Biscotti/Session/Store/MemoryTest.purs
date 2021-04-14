@@ -3,7 +3,7 @@ module Test.Biscotti.Session.Store.MemoryTest
   ) where
 
 import Prelude
-import Biscotti.Cookie.Types (Cookie(..))
+import Biscotti.Cookie as Cookie
 import Biscotti.Session as Session
 import Biscotti.Session.Store as Store
 import Data.Either (Either(..))
@@ -36,7 +36,7 @@ testSuite = do
     test "destroy returns an expired cookie and removes the key" do
       store <- liftEffect $ Session.memoryStore "_my_app"
       cookie <- unsafeFromRight <$> Store.create store { currentUser: "drew" }
-      Cookie { expires } <- unsafeFromRight <$> Store.destroy store cookie
-      assert "expected an expires date" (expires /= Nothing)
+      cookie' <- unsafeFromRight <$> Store.destroy store cookie
+      assert "expected an expires date" (Cookie.getExpires cookie' /= Nothing)
       session <- Store.get store cookie
       session `shouldEqual` Left "session not found"
